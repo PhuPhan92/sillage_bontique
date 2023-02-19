@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MSBarChartService extends DBContext implements IBarChartService {
-    private static final String SELLECT_ALL_BARCHART_TYPE = "select `name`, count(id_product) as `quantity` from product p join order_item oi on p.id = oi.id_product group by name;";
+    private static final String SELLECT_ALL_BARCHART = "select `name`, count(id_product) as `quantity`, sum(p.price * oi.quantity) as `total` from product p join order_item oi on p.id = oi.id_product group by name;";
     @Override
     public List<Barchart> getAllBarChart() {
         List<Barchart> barcharts = new ArrayList<>();
@@ -21,7 +21,7 @@ public class MSBarChartService extends DBContext implements IBarChartService {
 //            PreparedStatement preparedStatement = connection.prepareStatement(SELLECT_ALL_CUSTOMER);
 
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(SELLECT_ALL_BARCHART_TYPE);
+            ResultSet rs = statement.executeQuery(SELLECT_ALL_BARCHART);
             while (rs.next()) {
                 Barchart c = getBarChartFromRs(rs);
                 barcharts.add(c);
@@ -38,9 +38,11 @@ public class MSBarChartService extends DBContext implements IBarChartService {
         Barchart barchart = new Barchart();
         int quantity = rs.getInt("quantity");
         String name = rs.getString("name");
+        double total = rs.getDouble("total");
 
         barchart.setQuantity(quantity);
         barchart.setName(name);
+        barchart.setSum(total);
         return barchart;
     }
 }

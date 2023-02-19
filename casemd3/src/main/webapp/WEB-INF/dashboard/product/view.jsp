@@ -209,11 +209,12 @@
                                                         <ul>
                                                             <li><a href="/customers">Customer</a></li>
                                                             <li><a href="/products">Product</a></li>
+                                                            <li><a href="/BarChart">Thống kê</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li><a href="contact.html">contact us</a></li>
+
                                         </ul>
                                     </nav>
                                 </div>

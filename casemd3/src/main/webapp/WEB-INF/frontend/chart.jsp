@@ -15,6 +15,7 @@
   <title>Chart</title>
   <jsp:include page="/WEB-INF/dashboard/layout/meta_head.jsp"></jsp:include>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body data-layout="horizontal">
@@ -28,45 +29,32 @@
       </a>
     </div>
   </nav>
+  <div style="padding-top: 130px" class="container">
+    <h3>Số Lượng Sản Phẩm Đã Bán Được</h3>
+    <table class="table table-striped" style="padding-top: 130px">
+      <thead>
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng bán ra</th>
+        <th>Tổng tiền</th>
 
-  <!-- End Navigation Bar-->
-
-  <!-- ============================================================== -->
-  <!-- Start Page Content here -->
-  <!-- ============================================================== -->
-  <div class="col-lg-6">
-    <div class="demo-box mt-5 mt-lg-0">
-      <h4 class="header-title">Bar Chart</h4>
-      <p class="sub-header">
-        A bar chart is a way of showing data as bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
-      </p>
-
-      <canvas id="bar" height="300"></canvas>
-    </div>
+      </tr>
+      </thead>
+      <tbody>
+      <c:set scope="request" var="temp" value="${0}"></c:set>
+      <c:forEach var="c" items="${requestScope.chart }" >
+        <tr>
+          <td>${c.getName()}</td>
+          <td>${c.getQuantity()}</td>
+          <td>   <fmt:formatNumber type="number" maxFractionDigits = "3" value="${c.getSum()}" /> đ</td>
+        </tr>
+      </c:forEach>
+      </tbody>
+    </table>
   </div>
 
-  <!-- ============================================================== -->
-  <!-- End Page content -->
-  <!-- ============================================================== -->
 
 </div>
-<c:forEach items="${requestScope.chart}" var="c">
-          <c:if test="${requestScope.ct == cType.getId()}">selected</c:if>
-          value="${cType.getId()}">${cType.getName()}</option>
-</c:forEach>
-<script>
-  var myLineChart = new Chart(document.getElementById("bar").getContext("2d")).Line(LineChart, {scaleFontSize: 14, scaleFontColor: "#ff8540"});
-  var LineChart = {
-    labels: ["Ruby", "jQuery", "Java", "ASP.Net", "PHP"],
-    datasets: [{
-      fillColor: "rgba(151,249,190,0.5)",
-      strokeColor: "rgba(255,255,255,1)",
-      pointColor: "rgba(220,220,220,1)",
-      pointStrokeColor: "#fff",
-      data: [10, 20, 30, 40, 50]
-    } ]
-  }
-</script>
 <!-- Vendor js -->
 <script src="assets\js\vendor.min.js"></script>
 

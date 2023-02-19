@@ -212,10 +212,12 @@
                                                                         <ul>
                                                                             <li><a href="/customers">Customer</a></li>
                                                                             <li><a href="/products">Product</a></li>
+                                                                            <li><a href="/BarChart">Thống kê</a></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
                                                             </li>
+
                                                         </ul>
                                                     </nav>
                                                 </div>
